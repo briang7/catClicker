@@ -1,48 +1,52 @@
-
-
-var ViewModel = function(){
-	var that = this
-
-	this.catsModel = ko.observableArray([
+var catsModel = ko.observableArray([
 	{
 		'name': 'Fatty',
 		'clickCount': 0,
 		'src': 'pics/fatty.jpg',
-		'level': 1,
+		'level': '',
 		'nickNames':''
 	},{
 		'name': 'Human',
 		'clickCount': 0,
 		'src': 'pics/human.png',
-		'level': 1,
+		'level': '',
 		'nickNames':''
 	},{
 		'name': 'Killer',
 		'clickCount': 0,
 		'src': 'pics/killer.jpg',
-		'level': 1,
+		'level': '',
 		'nickNames':''
 	},{
 		'name': 'Scaredy',
 		'clickCount': 0,
 		'src': 'pics/scaredy.jpg',
-		'level': 1,
+		'level': '',
 		'nickNames':''
 	},{
 		'name': 'Stupid',
 		'clickCount': 0,
 		'src': 'pics/stupid.jpg',
-		'level': 1,
+		'level': '',
 		'nickNames':''
 }]);
 
+var cat = function(){
+	for(var i = 0; i<catsModel.length; i++){
+	this.name = ko.observable(this.catsModel.name[i]);
+	this.clickCount = ko.observable(this.catsModel.clickCount[i]);
+	this.src = ko.observable(this.catsModel.src[i]);
+	}
+	
+}
 
-	this.name = ko.observable(this.name);
-	this.clickCount = ko.observable(0);
-	this.src = ko.observable('pics/fatty.jpg');
+
+var ViewModel = function(){
+	this.currentCat= ko.observable(new cat());
 	this.incrementCounter = function() {
-		this.clickCount(this.clickCount() + 1)
+		this.currentCat().clickCount(this.currentCat().clickCount() + 1)
 	};
+
 }
 
 ko.applyBindings(new ViewModel());
