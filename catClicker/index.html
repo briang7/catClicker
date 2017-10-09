@@ -4,18 +4,18 @@
     <title>Cat Clicker</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-   <!--  <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="css/style.css"> -->
+    <!-- <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css"> -->
+    <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 <body>
   <header>
       <ul data-bind='foreach: catsModel'>
-        <li data-bind='text: name'></li>
+        <li><button data-bind='text: name'></button></li>
       </ul>
       <h2 data-bind='text: name'></h2>
-      <div data-bind='text: clickCount'></div>
+      <div data-bind='text: currentCat().clickCount'></div>
   </header>
-  <img src='' data-bind='click: incrementCounter, attr:{src: src}'>
+  <img src='' data-bind='click: incrementCounter, attr:{src: currentCat().src}'>
 
 <script src="js/jQuery.js"></script>
 <script src="js/Knockout.js" ></script>
