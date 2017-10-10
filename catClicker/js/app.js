@@ -1,4 +1,4 @@
-var catsModel = ko.observableArray([
+var catsModel = [
 	{
 		'name': 'Fatty',
 		'clickCount': 0,
@@ -8,7 +8,7 @@ var catsModel = ko.observableArray([
 	},{
 		'name': 'Human',
 		'clickCount': 0,
-		'src': 'pics/human.png',
+		'src': 'pics/human.jpg',
 		'level': '',
 		'nickNames':''
 	},{
@@ -29,20 +29,46 @@ var catsModel = ko.observableArray([
 		'src': 'pics/stupid.jpg',
 		'level': '',
 		'nickNames':''
-}]);
+}];
 
-var cat = function(){
-	for(var i = 0; i<catsModel.length; i++){
-	this.name = ko.observable(this.catsModel.name[i]);
-	this.clickCount = ko.observable(this.catsModel.clickCount[i]);
-	this.src = ko.observable(this.catsModel.src[i]);
-	}
+var cat = function(data){
+	// for(var i = 0; i<catsModel.length; i++){
+	this.name = ko.observable(data.name);
+	this.clickCount = ko.observable(data.clickCount);
+	this.src = ko.observable(data.src);
+	// this.level = ko.computed(function(){
+	// 	// var level;
+	// 	// var clicks = this.currentCat().clickCount();
+	// 	// if(clicks<10){
+	// 	// 	level = 'kitten';
+	// 	// }else if(clciks <20){
+	// 	// 	level = 'teen';
+	// 	// }else {
+	// 	// 	level = 'ninja';
+	// 	// }
+	// });
+	// }
 	
 }
 
 
 var ViewModel = function(){
-	this.currentCat= ko.observable(new cat());
+	var that = this;
+
+	this.catList =ko.observableArray([]);
+
+
+	catsModel.forEach(function(catItem){
+		that.catList.push(new cat(catItem));
+	});
+
+	this.changeCat = function(a){
+		console.log("fuck");
+		that.currentCat(a);
+	};
+
+	this.currentCat= ko.observable(this.catList()[0]);
+
 	this.incrementCounter = function() {
 		this.currentCat().clickCount(this.currentCat().clickCount() + 1)
 	};
@@ -50,6 +76,3 @@ var ViewModel = function(){
 }
 
 ko.applyBindings(new ViewModel());
-
-
-
