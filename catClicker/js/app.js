@@ -63,7 +63,6 @@ var ViewModel = function(){
 	});
 
 	this.changeCat = function(a){
-		console.log("fuck");
 		that.currentCat(a);
 	};
 
